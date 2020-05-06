@@ -81,20 +81,13 @@
 	
 			//Antes de 2015: concatenacion
 			//let mensaje = "Hay " + stock + " unidades de '"+nombre+"' que valen ARS "+precio+" c/u"
-			
 			//Despues de 2015: template string
 			let mensaje = `Hay ${stock} unidades de "${nombre}" que valen ARS ${(precio * 1.21)} c/u`
-			
 			//Manipulacion del DOM - Document Object Model
 			document.querySelector("article").innerText = mensaje
 		</script>
 	</body>
 </html>
-
-
-			
-		
-			
 
 				
 
