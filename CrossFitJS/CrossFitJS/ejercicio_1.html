@@ -7,7 +7,6 @@
 		<link rel="stylesheet" href="assets/extra.css">
 		<title>Aprender a programar con JavaScript</title>
 	</head>
-
 	<body>
 		<header>
 			<nav>
@@ -20,11 +19,9 @@
 				<a href="ejercicio_7.html">Ejercicio 7</a>
 			</nav>
 		</header>
-
 		<section>
 			<h1>Aprender a programar con JavaScript</h1>
 		</section>
-
 		<aside>
 			<p>Crear un "asistente" que pida los siguientes datos de un producto:</p>
 			<ul>
@@ -40,50 +37,66 @@
 			</article>
 		</aside>
 
+		<script src="assets/validador.js"></script>
 		<script>
 			/*
-		// valores determinados..
-		let nombre = "cafe"
-		let Stock = 300
-		let precio = 125.50
-		let disponible = true 
-
-		// valores indeterminados ..
-		// 1) determinable por una operacion logico - matematica
-			 
-			 let precioFinal = precio * 1.21 
-
-		// 2) determinable  por una operacion de usuario
-
-			let usuario = prompt("ingrese su nombre:")
-			
+			//Valores determinados...
+			let nombre = "Cafe"     //<-- String: valores alfanumericos
+			let stock = 300         //<-- Int: numeros enteros
+			let precio = 125.75     //<-- Float: numeros con decimales
+			let disponible = true   //<-- Bool: valores true/false
+			//Valores indeterminados...
+			//1) ... determinable por una operacion logico-matematica
+			let precioFinal = precio * 1.21
+			//2) ... determinable por una operacion del usuario
+			let usuario = prompt("Ingrese su nombre:")
 			console.log(precioFinal)
 			*/
-			// 1# ingreso de datos
-
-			let nombre = prompt("ingrese nombre:")
-			let Stock = prompt("ingrese stock:")
-			let precio = prompt("ingrese precio:")
-			let disponible = confirm("esta disponible?:") 
-			
-			// 2# validacion de datos
-			Stock = parseInt(Stock)
+			//1# Ingreso de Datos
+			let nombre = prompt("Ingrese nombre:")
+			let stock = prompt("Ingrese stock:")
+			let precio = prompt("Ingrese precio:")
+			let disponible = confirm("Esta disponible?")
+			//2# Validacion de datos
+			stock = parseInt(stock)
 			precio = parseFloat(precio)
-
-			console.log("usted ingreso estos datos:")
+			console.log("Usted ingreso estos datos:")
 			console.log(nombre)
-			console.log(Stock)
+			console.log(stock)
 			console.log(precio)
 			console.log(disponible)
-
-			if(nombre == "" || nombre == null || nombre == undefined ){
-				alert("ERROR .... nombre No puede quedar vacio !!")
+			if( nombre == "" || nombre == null || nombre == undefined || !isNaN(nombre) ){
+				alert("ERROR... nombre NO puede quedar vacio!!")
 			}
-
-			if(isNaN(Stock) || Stock < 0 || stock > 1000){
-
-				alert("ERROR .... ingrese un stock valido !!")
+			if( isNaN(stock) || stock < 0 || stock > 1000 ){
+				alert("ERROR, ingrese un stock valido...")
 			}
+			while( isNaN(precio) || precio < 0 ){
+				alert("ERROR, ingrese un precio valido...")
+				precio = prompt("Reingrese precio (solo numeros):")
+			}
+			if( disponible == undefined ){
+				alert("ERROR, debe especificar la disponibilidad")
+			}
+	
+			//Antes de 2015: concatenacion
+			//let mensaje = "Hay " + stock + " unidades de '"+nombre+"' que valen ARS "+precio+" c/u"
+			
+			//Despues de 2015: template string
+			let mensaje = `Hay ${stock} unidades de "${nombre}" que valen ARS ${(precio * 1.21)} c/u`
+			
+			//Manipulacion del DOM - Document Object Model
+			document.querySelector("article").innerText = mensaje
+		</script>
+	</body>
+</html>
+
+
+			
+		
+			
+
+				
 
 
 		</script>
