@@ -7,7 +7,6 @@
 		<link rel="stylesheet" href="assets/extra.css">
 		<title>Aprender a programar con JavaScript</title>
 	</head>
-
 	<body>
 		<header>
 			<nav>
@@ -20,25 +19,25 @@
 				<a href="ejercicio_7.html">Ejercicio 7</a>
 			</nav>
 		</header>
-
 		<section>
 			<h1>Calcular IVA</h1>
 			<input id="precio" type="number" placeholder="Colocar valor">
 			<p class="mensaje">El precio con IVA es de ar$<span class="total">0</span></p>
 		</section>
-
 		<aside>
 			<p>Generar una función <code>calcularIVA</code> que tome el valor del campo y escriba el resultado en el <code>span</code></p>
 			<p>Ejecutar la función utilizando la consola de desarrollador</p>
 		</aside>
 
+		
 		<script>
 			function calcularIVA(){
 				/* 1) seleccionar el campo numérico y guardarlo en una variable */
-
+				let campo = document.querySelector("#precio")
 				/* 2) obtener el valor del campo */
-
+				let valor = campo.value
 				/* 3) escribir en el span el valor del campo + IVA */
+				document.querySelector("span.total").innerText = valor * 1.21
 			}
 		</script>
 	</body>
