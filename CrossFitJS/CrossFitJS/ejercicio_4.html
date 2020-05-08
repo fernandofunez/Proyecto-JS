@@ -38,13 +38,11 @@
 				let campo = document.querySelector("#precio")
 				/* 2) Obtener el valor del campo */
 				let valor = campo.value
-				
 				let valorFinal = valor * 1.21
 				/* 3) Escribir en el span el valor del campo + IVA */
 				document.querySelector("span.total").innerText = valorFinal
-
 				/* 4) Si el valor con IVA es superior a 100 modificar el estilo del mensaje */
-				if( valorFinal > 100){
+				if( valorFinal > 100 ){
 					document.querySelector(".mensaje").style.color = "red"
 				}
 			}
