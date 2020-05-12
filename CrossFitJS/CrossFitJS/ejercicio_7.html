@@ -57,58 +57,44 @@
 			<p>Si el usuario vuelve a "seleccionar habitación" quedan todas escondidas</p>
 		</aside>
 
+		<script src="assets/validador.js"></script>
 		<script>
-		
 			/* 1) Seleccionar todas las habitaciones */
 			let habitaciones = document.querySelectorAll(".habitacion")
 			//console.log(habitaciones)
 			/* 2) Seleccionar el select */
 			let menu = document.querySelector("select[name=habitacion]")
+
 			/* 3) Asignar la funcion mostrarOpcion al evento correspondiente */
 			menu.onchange = mostrarOpcion
+
 			esconderHabitaciones() //<-- 1) Cuando carga la pagina
+
 			/* 4) Pensar una solucion logica para esconder todas las habitaciones cada vez que sea necesario */
 			function esconderHabitaciones(){
 				for(let i = 0; i < habitaciones.length; i++){
 					habitaciones[i].classList.add("esconder")
 				}
-			
 			}
+
 			function mostrarOpcion(){
-				
 				//debugger
 
 				esconderHabitaciones() //<-- 2) Cuando se esta por mostrar una habitacion (esconde la anterior)
 				/* 5) Obtener la opción seleccionada */
 				let opcion = menu.value
 				console.log(`Usted eligió la habitación ${opcion}`)
+
 				if(opcion == 0) return //<-- salir de la funcion
 				
 				/* 6) Seleccionar la habitación correspondiente usando un selector dinámico */
 				let elegida = document.querySelector(`.habitacion-${opcion}`)
 				console.log(elegida)
+
 				/* 7) Remover la clase correspondiente */
 				elegida.classList.remove("esconder")
 			}
-
-			////////////////////////////////////////////////////////////
-			let links = document.querySelectorAll("nav a")
-
-
-
-	links(1).onclick = validarLink 
-
-
-function validarLink(evento){
-	evento.preventDefault() //<-- JS interrumpe el comportamiento predeterminado
-
-	let rta = confirm(`Está seguro que desea ir al "${evento.target.innerText}"?`)
-
-	if( rta ){
-		//ACA HAY QUE REPROGRAMAR QUE EL NAVEGADOR VAYA A DONDE DICE EL LINK CLICKEADO
-		window.location.href = evento.target.href
-	}
-} 
+			/////////////////////////////////////////////////////////
 		</script>
 	</body>
 </html>
