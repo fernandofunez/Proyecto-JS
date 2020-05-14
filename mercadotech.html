@@ -42,62 +42,18 @@
 		</footer>
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/jquery/jquery.min.js"></script>
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+		<script src="producto.class.js"></script>
 		<script>
-			let nombre = "iphone X"
-			let stock = 1000
-			let precio = 499.99
+		///////////////////
 	
-			let unProducto = ["Iphone Mini",650,499.99]
-	
-			let otroProducto = { //<-- objeto literal 
-				nombre : "Ipad Pro",
-				stock : 650,
-				precio : 1499.99
-			}
-
-			otroProducto.imagen = "https://picsum.photos/480/320/"
-
-			let tercerProducto = {} // <--objeto diferido
-
-			tercerProducto.nombre = "Samsung Galaxy S10"
-			tercerProducto.stock = 450
-			tercerProducto.precio = 1499.99
-			tercerProducto.imagen ="http://lorempixel.com/480/320/technics/"
-
-	
-			Mostrar(otroProducto)
-			Mostrar(tercerProducto)
-	/////////////////////////////////////////////////////////////////////
-	function Mostrar(producto){
-
-		const ficha = document.createElement("article")
-	
-	ficha.classList.add("col-4")
-
-	ficha.innerHTML=`<div class="card h-100">
-						<a href="#">
-							<img class="card-img-top img-fluid" src="${producto.imagen}" alt="">
-						</a>
-						<div class="card-body">
-							<h4 class="card-title"><a href="#">${producto.nombre} </a> <span class="badge badge-pill badge-success float-right">$${producto.precio}</span></h4>
-							<p class="card-text">${producto.stock} unid.</p>
-							<button class="btn btn-primary float-right">Comprar</button>
-						</div>
-					</div> `
-
-document.querySelector("#productos-destacados").appendChild(ficha)
-}	
-	
-	
-
-	
-	console.log(`hay ${otroProducto.stock} unidades de ${otroProducto.nombre} que valen $${otroProducto.precio}`)
+		let elProducto = new producto("Ipad Pro",650,1499.99,"https://picsum.photos/480/320/", "Apple")//<--instanciacion de un objeto "producto"
+		let elOtroProducto = new producto("Samsung Galaxy S10",750,2499.99,"http://lorempixel.com/480/320/technics/", "Samsung" )
+		let elUltimoProducto = new producto("Ipad Mini",650,1499.99,"https://picsum.photos/480/320/", "Apple" )
 
 
-		
-
-		
+		elProducto.Mostrar()
+		elOtroProducto.Mostrar()
+		elUltimoProducto.Mostrar()
 	
 		</script>
 	
