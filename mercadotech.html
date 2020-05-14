@@ -28,7 +28,7 @@
 			</div>
 		</header>
 		<main class="container">
-			<h2 class="w-100 my-3 p-3 border">&#x2B50; Muchas cucus </h2>
+			<h2 class="w-100 my-3 p-3 border">&#x2B50; Productos Destacados</h2>
 			<!-- AREA PRODUCTOS DESTACADOS -->
 			<section id="productos-destacados" class="row py-3">
 				
@@ -46,22 +46,20 @@
 		<script>
 		///////////////////
 	
-		let elProducto = new producto("Ipad Pro",650,1499.99,"file:///C:/Users/ferna/Pictures/Camera%20Roll/28619538_10215582181011805_1422728678094281700_o.jpg", "Apple")//<--instanciacion de un objeto "producto"
-		let elOtroProducto = new producto("Samsung Galaxy S10",750,2499.99,"file:///C:/Users/ferna/Pictures/Camera%20Roll/39799547_10216953360250429_9025540143779414016_o.jpg", "Samsung" )
-		let unTercerProducto = new producto("Motorola one",850,4555.59,"file:///C:/Users/ferna/Pictures/Camera%20Roll/40650616_10217065670458114_906641130597122048_n.jpg", "Motorola")
-		let unQuartoProducto = new producto("huawey S6",900,5999.99,"file:///C:/Users/ferna/Pictures/Camera%20Roll/45228773_10217533888163264_8429110400594739200_o.jpg"," Huawey")
-		let elUltimoProducto = new producto("Ipad Mini",650,1499.99,"file:///C:/Users/ferna/Pictures/Camera%20Roll/56402044_10218791846091426_2454442929125588992_o.jpg", "Apple" )
+		let elProducto = new producto("Ipad Pro",650,1499.99,"https://picsum.photos/480/320/", "Apple")//<--instanciacion de un objeto "producto"
+		let elOtroProducto = new producto("Samsung Galaxy S10",750,2499.99,"http://lorempixel.com/480/320/technics/", "Samsung" )
+		let unTercerProducto = new producto("Motorola one",850,4555.59,"https://picsum.photos/480/320/", "Motorola")
+		let unQuartoProducto = new producto("huawey S6",900,5999.99,"https://picsum.photos/480/320/"," Huawey")
+		let elUltimoProducto = new producto("Ipad Mini",650,1499.99,"https://picsum.photos/480/320/", "Apple" )
 
 		let listado = [ elProducto,elOtroProducto,unTercerProducto,unQuartoProducto,elUltimoProducto]
 
-			
+
 		elProducto.Mostrar()
 		elOtroProducto.Mostrar()
 		unTercerProducto.Mostrar()
 		unQuartoProducto.Mostrar()
 		elUltimoProducto.Mostrar()
-		
-	
 	
 		</script>
 	
