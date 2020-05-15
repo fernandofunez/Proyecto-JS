@@ -44,23 +44,21 @@
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="producto.class.js"></script>
 		<script>
-		///////////////////
-	
-		let elProducto = new producto("Ipad Pro",650,1499.99,"https://picsum.photos/480/320/", "Apple")//<--instanciacion de un objeto "producto"
-		let elOtroProducto = new producto("Samsung Galaxy S10",750,2499.99,"http://lorempixel.com/480/320/technics/", "Samsung" )
-		let unTercerProducto = new producto("Motorola one",850,4555.59,"https://picsum.photos/480/320/", "Motorola")
-		let unQuartoProducto = new producto("huawey S6",900,5999.99,"https://picsum.photos/480/320/"," Huawey")
-		let elUltimoProducto = new producto("Ipad Mini",650,1499.99,"https://picsum.photos/480/320/", "Apple" )
 
-		let listado = [ elProducto,elOtroProducto,unTercerProducto,unQuartoProducto,elUltimoProducto]
+		fetch("https://api.npoint.io/6b51ed82842567c3a283").then (function(rta){
 
+			return rta.json()//<--convierte los datos de JSON en Objetos
 
-		elProducto.Mostrar()
-		elOtroProducto.Mostrar()
-		unTercerProducto.Mostrar()
-		unQuartoProducto.Mostrar()
-		elUltimoProducto.Mostrar()
-	
+		}) .then(function(productos){
+
+			productos.forEach(function({Nombre, Stock, Precio, Imagen, Marca }){ //<-- desmenuzar el objeto sacando solos los datos necesarios
+				let superProducto = new producto(Nombre,Stock,Precio,Imagen,Marca)
+				superProducto.Mostrar()
+				
+			});
+
+		})
+
 		</script>
 	
 	</body>
