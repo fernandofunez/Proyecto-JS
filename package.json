@@ -1,0 +1,22 @@
+{
+  "name": "mercadotech",
+  "version": "0.0.1",
+  "description": "plataforma de productos JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandofunez/Proyecto-JS.git"
+  },
+  "author": "fernandofunez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fernandofunez/Proyecto-JS/issues"
+  },
+  "homepage": "https://github.com/fernandofunez/Proyecto-JS#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
