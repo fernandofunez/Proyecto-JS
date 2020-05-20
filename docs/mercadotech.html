@@ -44,27 +44,19 @@
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="producto.class.js"></script>
 		<script>
-
-		fetch("productos.json").then (function(rta){
+			let productos = null
+		fetch("https://api.npoint.io/6b51ed82842567c3a283").then (function(rta){
 
 			return rta.json()//<--convierte los datos de JSON en Objetos
 
 		}) .then(function(objetos){
-			console.log(objetos)
+		
 			
-			objetos.forEach(function({Nombre, Stock, Precio, Imagen, Marca }){ //<-- desmenuzar el objeto sacando solos los datos necesarios
-				let superProducto = new producto(Nombre,Stock,Precio,Imagen,Marca)
-				superProducto.Mostrar()
-				
-			});
-
+	
 			//coleccion de objetos de tipo producto
 
-			let productos = Objetos.map(({Nombre,Stock,Precio,Imagen,Marca}) => {
-				let superProducto =  new producto(Nombre,Stock,Precio,Imagen,Marca)
-				return superProducto
-			})
-			console.log(productos)
+			productos = objetos.map(({Nombre,Stock,Precio,Imagen,Marca}) => new producto(Nombre,Stock,Precio,Imagen,Marca)	)
+			
 		})
 
 		</script>
