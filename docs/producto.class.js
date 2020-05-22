@@ -29,6 +29,15 @@ class producto {
         document.querySelector("#productos-destacados").appendChild(ficha)
      }
 
+     descuento (cupon){ //<---metodo de instancia
+        if(cupon  == UHTXTU78I){
+            this .precio -=(this.precio * 0.15) 
+        }
+     } 
+        ////////////////////////////////////////
+         static armarCatalago(){//<---metodos de clases(o estaticos)
+
+        }
 }
 
     ///////////////////

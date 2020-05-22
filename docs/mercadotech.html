@@ -6,6 +6,17 @@
 		<title>MercadoTECH - Tu e-shop.js</title>
 		<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-shop-item/css/shop-item.css">
+	<style>
+		article{
+			opacity: 0;
+			animation: fadeIn 3s forwards;
+		}
+		@keyframes fadeIn {
+			from {opacity: 0}
+			to {opacity: 1 }
+		}
+
+	</style>
 	</head>
 
 	<body>
@@ -84,8 +95,14 @@
 
 					return resultado
 					
+				}
+
+				const aguanta = timeout => {//aguanta(3000)
+					return new Promise(resolve => setTimeout(resolve,timeout) )
+
 
 				}
+
 
 				//////////////////////////////////////////////////////////////////////
 
@@ -95,8 +112,9 @@
 
 					if( catalogo instanceof Array ){ //<-- Si el resultado es una array
 
-						catalogo.forEach( producto => {
-							producto.Mostrar()
+						catalogo.forEach( async producto => {
+							await aguanta(5000)
+							await producto.Mostrar()
 						})
 
 					} else {
