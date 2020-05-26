@@ -40,6 +40,11 @@
 		</header>
 		<main class="container">
 			<h2 class="w-100 my-3 p-3 border">&#x2B50; Productos Destacados</h2>
+			<nav id= "filtros">
+				 <button class="btn  btn-dark" data-min="0" data-max="500">0-500</button>
+				 <button class="btn  btn-dark" data-min="500" data-max="1500">500-1500</button>
+				 <button class="btn  btn-dark"data-min="1500" data-max="99999">+ $1500</button>
+			</nav>
 			<!-- AREA PRODUCTOS DESTACADOS -->
 			<section id="productos-destacados" class="row py-3">
 				
@@ -85,17 +90,7 @@
 					let rta = await fetch(url)
 					return await rta.json() //<-- Retornar convertido de JSON a Objetos genericos
 				}				
-				const armarCatalogo = async (max) =>  {
-
-					let objetos = await GET("https://api.npoint.io/6b51ed82842567c3a283")
-
-					let productos = objetos.map(({Nombre,Stock,Precio,Imagen,Marca}) => new producto(Nombre,Stock,Precio,Imagen,Marca))
-
-					let resultado = productos.filter(producto => producto.precio > 249 && producto.stock > 100)
-
-					return resultado
-					
-				}
+				
 
 				const aguanta = timeout => {//aguanta(3000)
 					return new Promise(resolve => setTimeout(resolve,timeout) )
@@ -105,10 +100,22 @@
 
 
 				//////////////////////////////////////////////////////////////////////
-
+				 document.querySelectorAll("#filtros button").forEach(filtro =>{
+					filtro.onclick = (evento) =>{
+						let rango = {
+							min : evento.target.getAttribute("data-min"),
+							max : evento.target.getAttribute("data-max")
+						}
+						console.log(rango)
+					}
+				 })
 				window.onload = async () => {
 					
-					let catalogo = await armarCatalogo()
+					
+					let objetos = await GET("https://api.npoint.io/6b51ed82842567c3a283")
+
+
+					let catalogo =  Producto.armarCatalogo(objetos)
 
 					if( catalogo instanceof Array ){ //<-- Si el resultado es una array
 
@@ -123,6 +130,7 @@
 
 				
 				}
+
 
 		</script>
 	
