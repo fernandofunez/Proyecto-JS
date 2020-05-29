@@ -39,12 +39,10 @@ Mostrar(){
  static armarCatalogo(objetos, rango){//<---metodos de clases(o estaticos)
    
     let productos = objetos.map(({Nombre,Stock,Precio,Imagen,Marca}) => new Producto(Nombre,Stock,Precio,Imagen,Marca))
+        
+        let resultado = rango ? productos.filter(producto => producto.precio > rango.min && producto.precio < rango.max) : productos
 
-	let resultado = productos.filter(producto => producto.precio > 249 && producto.stock > 100)
-
-					return resultado
-
-
-
+        return resultado
+    
  }
 }

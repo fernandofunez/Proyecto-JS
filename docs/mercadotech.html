@@ -60,67 +60,35 @@
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="producto.class.js"></script>
 		<script>
-			let productos = null
-	
-	/*
-		fetch("https://api.npoint.io/6b51ed82842567c3a283")
-		
-			.then (rta=>rta.json()) 
-			.then(objetos => objetos.map(({Nombre,Stock,Precio,Imagen,Marca}) => new producto(Nombre,Stock,Precio,Imagen,Marca)))
-			.then(productos=>productos.filter(producto => producto.precio < 300 && producto.stock > 100))
-			.then(resultado=>{
-			//1)Mostrar todos los productos...
-			if(resultado instanceof Array){ //<-- si el resultado es una array
 
-			
-			resultado.forEach(producto => {
-				producto.Mostrar()
-			})
-			
-			}else{
-				resultado.Mostrar()
-			}
-			
-		})
-		*/
-	
-		////////////////////////////////////////////
-
-		const GET = async url => {
+				const GET = async url => {
 					let rta = await fetch(url)
 					return await rta.json() //<-- Retornar convertido de JSON a Objetos genericos
 				}				
-				
-
 				const aguanta = timeout => {//aguanta(3000)
 					return new Promise(resolve => setTimeout(resolve,timeout) )
 
 
 				}
+				const mostrarCatalogo = async rango => { 
+					
+					let objetos = null
+					if( !localStorage.getItem("CATALOGO") ){ //<-- Si NO hay un Local Storage ...
+						// ↓ Un Array de muchos Object
+						objetos = await GET("productos.json")
+						localStorage.setItem("CATALOGO", JSON.stringify(objetos) )
 
+					} else { //<-- Si EFECTIVAMENTE hay un Local Storage ...
 
-				//////////////////////////////////////////////////////////////////////
-				 document.querySelectorAll("#filtros button").forEach(filtro =>{
-					filtro.onclick = (evento) =>{
-						let rango = {
-							min : evento.target.getAttribute("data-min"),
-							max : evento.target.getAttribute("data-max")
-						}
-						console.log(rango)
+						objetos = JSON.parse( localStorage.getItem("CATALOGO") ) 
+					
 					}
-				 })
-				window.onload = async () => {
 					
-					
-					let objetos = await GET("https://api.npoint.io/6b51ed82842567c3a283")
-
-
-					let catalogo =  Producto.armarCatalogo(objetos)
+					let catalogo = Producto.armarCatalogo(objetos, rango)
 
 					if( catalogo instanceof Array ){ //<-- Si el resultado es una array
 
 						catalogo.forEach( async producto => {
-							await aguanta(5000)
 							await producto.Mostrar()
 						})
 
@@ -128,9 +96,39 @@
 						catalogo.Mostrar()
 					}
 
-				
 				}
+				/////////////////////////////////
+				document.querySelectorAll("#filtros button").forEach(filtro => {
+					filtro.onclick = evento => {
+						let rango = {
+							min : evento.target.getAttribute("data-min"),
+							max : evento.target.getAttribute("data-max")
+						}
+						document.querySelector("#productos-destacados").innerHTML = null
+						mostrarCatalogo(rango)
+					}
+				})
 
+				mostrarCatalogo()
+
+
+				//////////////////
+				//window.sessionStorage & window.localStorage
+				/*
+				localStorage.setItem(NOMBRE, VALOR)
+				localStorage.getItem()
+				localStorage.removeItem()
+				localStorage.clear()
+				*/
+
+				//localStorage.setItem("usuario", "eant")
+				/*
+				let usuario = localStorage.getItem("usuario")
+				if ( usuario == "eant"){
+					alert("Bienvenido de vuelta @" + usuario)
+				}
+				localStorage.removeItem("usuario")
+				*/
 
 		</script>
 	
