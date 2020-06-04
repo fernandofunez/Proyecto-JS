@@ -1,6 +1,7 @@
 class Producto {
 
-    constructor(n, s, p, i, m){
+    constructor(id, n, s, p, i, m){
+        this.id = id
         this.nombre = n
         this.stock = s
         this.precio = p
@@ -22,7 +23,7 @@ class Producto {
                                 <h4 class="card-title"><a href="#">${this.marca} - ${this.nombre}</a> <span class="badge badge-pill badge-success float-right">$${ parseFloat(this.precio).toFixed(2) }</span></h4>
                                 <p class="card-text">${this.stock} unid.</p>
                                 <button class="btn btn-warning btn-editar float-left ${ ( auth2 && auth2.isSignedIn.get() == true) ? "d-block" : "d-none" }">Editar</button>
-                                <button class="btn btn-primary btn-comprar float-right">Comprar</button>
+                                <button class="btn btn-primary btn-ver float-right">Ver +</button>
                             </div>
                         </div>`
         //debugger
@@ -71,6 +72,24 @@ class Producto {
             }
             
         }
+
+        this.vDOM.querySelector(".btn-ver").onclick = (evento) => {
+
+            //Ej: /mt-1-apple-iphone-6
+            const path = (`/MT-${this.id}-${this.marca.replace(" ", "-")}-${this.nombre.split(" ").join("-")}`).toLowerCase()
+
+            const HTML = document.querySelector("#producto")
+
+            HTML.querySelector("#producto-imagen").src = this.imagen
+            HTML.querySelector("#producto-nombre").innerText = this.marca + " " + this.nombre
+            HTML.querySelector("#producto-precio").innerText = "$" + this.precio
+            HTML.querySelector("#producto-detalle").innerText = "Lorem impsum dolor sit ammet..."
+            HTML.classList.remove("d-none")
+
+            document.querySelector("#productos-destacados").classList.add("d-none")
+
+            window.history.pushState({}, path, window.location.origin + path)
+        }
        
     }
 
@@ -82,7 +101,7 @@ class Producto {
     //////////////////////////////////////////////////////////////////
     static armarCatalogo(objetos, rango){ //<-- Metodos de Clase (o estaticos)
         
-        let productos = objetos.map( ({Nombre, Stock, Precio, Imagen, Marca}) => new Producto(Nombre, Stock, Precio, Imagen, Marca) )
+        let productos = objetos.map( ({idProducto, Nombre, Stock, Precio, Imagen, Marca}) => new Producto(idProducto, Nombre, Stock, Precio, Imagen, Marca) )
 
         let resultado = rango ? productos.filter( producto => producto.precio > rango.min && producto.precio < rango.max ) : productos  //<-- Operador ternario
 
