@@ -4,7 +4,7 @@ const server = express();
 
 const docs = express.static("docs")
 
-
+const port = process.env.PORT || 80
 
 server.use( docs )
 
@@ -19,4 +19,4 @@ server.get("/mercadotech.html", function(request,response){
 
 //server.post("")
 
-server.listen(80)
+server.listen(port)
