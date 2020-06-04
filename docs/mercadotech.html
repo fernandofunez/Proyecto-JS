@@ -6,17 +6,16 @@
 		<title>MercadoTECH - Tu e-shop.js</title>
 		<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-shop-item/css/shop-item.css">
-	<style>
-		article{
-			opacity: 0;
-			animation: fadeIn 3s forwards;
-		}
-		@keyframes fadeIn {
-			from {opacity: 0}
-			to {opacity: 1 }
-		}
-
-	</style>
+		<style>
+			article {
+				opacity: 0;
+				animation: fadeIn 3s forwards;
+			}
+			@keyframes fadeIn {
+				from { opacity: 0 }
+				to { opacity: 1 }
+			}
+		</style>
 	</head>
 
 	<body>
@@ -31,8 +30,8 @@
 						<li class="nav-item">
 							<a id="login" class="nav-link" href="#">&#x1F512; Ingresar</a>
 						</li>
-						<li class="nav-item d-none">
-							<a id="logout" class="nav-link" href="#">Bienvenid@ <span>{{USUARIO}}</span> [x]</a>
+						<li class="nav-item">
+							<a id="logout" class="nav-link d-none" href="#">Bienvenid@ <span>{{USUARIO}}</span> [x]</a>
 						</li>
 					</ul>
 				</nav>
@@ -40,15 +39,15 @@
 		</header>
 		<main class="container">
 			<h2 class="w-100 my-3 p-3 border">&#x2B50; Productos Destacados</h2>
-			<nav id= "filtros">
-				 <button class="btn  btn-dark" data-min="0" data-max="500">0-500</button>
-				 <button class="btn  btn-dark" data-min="500" data-max="1500">500-1500</button>
-				 <button class="btn  btn-dark"data-min="1500" data-max="99999">+ $1500</button>
+			<nav id="filtros">
+				<button class="btn btn-secondary" data-min="0" data-max="999999">Todos</button>
+				<button class="btn btn-secondary" data-min="0" data-max="500">$0 - $500</button>
+				<button class="btn btn-secondary" data-min="500" data-max="1500">$500 - $1500</button>
+				<button class="btn btn-secondary" data-min="1500" data-max="999999">+ $1500</button>
 			</nav>
 			<!-- AREA PRODUCTOS DESTACADOS -->
 			<section id="productos-destacados" class="row py-3">
 				
-
 			</section>
 		</main>
 		<footer class="py-5 bg-dark">
@@ -58,20 +57,76 @@
 		</footer>
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/jquery/jquery.min.js"></script>
 		<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="https://apis.google.com/js/api:client.js"></script>
 		<script src="producto.class.js"></script>
 		<script>
+				////////////////////////////////////////////////////////////////
+				window.auth2 = null
 
+				gapi.load("auth2", () => {
+					let credenciales = {
+						client_id: '909599252120-78uvnq8uts7c2da46bu4l9ouvvgcjo4j.apps.googleusercontent.com',
+						cookiepolicy: 'single_host_origin'
+					}
+
+					window.auth2 = gapi.auth2.init( credenciales ) //<-- Inicializar con las credenciales asincronicamente...
+					
+					window.auth2.then(() => { //<-- Chequear si esta logeado luego de inicializar con las credenciales...
+						
+						if( window.auth2.isSignedIn.get() ){ //<-- Si ya está logeado...
+							welcome()
+						} else {
+							console.log("No estas logeado :(")
+						}
+
+					})
+
+				})
+
+				//Boton de Login
+				document.querySelector("#login").onclick = e => {
+					e.preventDefault()
+					
+					window.auth2.signIn().then( welcome )
+				}
+
+				//Boton de Logout
+				document.querySelector("#logout").onclick = e => {
+					e.preventDefault()
+
+					window.auth2.signOut()
+
+					document.querySelector("#login").classList.remove("d-none")
+					document.querySelector("#logout").classList.add("d-none")
+
+					document.querySelectorAll(".btn-editar").forEach(btn => {
+						btn.classList.remove("d-block")
+						btn.classList.add("d-none")
+					})
+				}
+
+				//Bienvenida
+				const welcome = () => {
+					window.user = window.auth2.currentUser.get().getBasicProfile()
+
+					document.querySelector("#logout span").innerText = window.user.getName()
+
+					document.querySelector("#login").classList.add("d-none")
+					document.querySelector("#logout").classList.remove("d-none")
+
+					document.querySelectorAll(".btn-editar").forEach(btn => {
+						btn.classList.remove("d-none")
+					})
+				}
+				///////////////////////////////////////////////////////////////
 				const GET = async url => {
-					let rta = await fetch(url)
+					let rta = await fetch(url) //<-- Obtengo contenido en formato JSON
 					return await rta.json() //<-- Retornar convertido de JSON a Objetos genericos
 				}				
-				const aguanta = timeout => {//aguanta(3000)
-					return new Promise(resolve => setTimeout(resolve,timeout) )
-
-
+				const aguanta = timeout => { //aguanta(3000)
+					return new Promise( resolve => setTimeout(resolve, timeout) )
 				}
-				const mostrarCatalogo = async rango => { 
-					
+				const mostrarCatalogo = async rango => {
 					let objetos = null
 					if( !localStorage.getItem("CATALOGO") ){ //<-- Si NO hay un Local Storage ...
 						// ↓ Un Array de muchos Object
@@ -129,6 +184,7 @@
 				}
 				localStorage.removeItem("usuario")
 				*/
+
 
 		</script>
 	
